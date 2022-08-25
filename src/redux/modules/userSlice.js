@@ -44,11 +44,11 @@ const userSlice = createSlice({
     },
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      console.log(payload);
-      state.userInfo = payload.data;
+      console.log(payload.data);
+      state.userInfo = payload.data.account;
       state.profileImg = payload.data.profileImg;
       localStorage.setItem('user-profile', payload.data.profileImg);
-      localStorage.setItem('user-info', payload.data);
+      localStorage.setItem('user-info', payload.data.account);
       state.userToken = payload.headers.authorization;
     },
     [userLogin.rejected]: (state, { payload }) => {

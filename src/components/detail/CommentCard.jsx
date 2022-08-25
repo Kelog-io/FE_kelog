@@ -11,6 +11,9 @@ const CommentCard = ({comment}) => {
   const dispatch = useDispatch();
   const [ updateCommentMessage, setUpdateCommentMessage ] = useState(comment);
   const [ formToggle, setFormToggle ] = useState(false);
+  const userAccount = localStorage.getItem('user-info');
+
+  console.log("comment@@@@@@@", comment);
 
   // :: 댓글 삭제
   const onClickDeleteComment = (commentId) => {
@@ -65,12 +68,14 @@ const CommentCard = ({comment}) => {
             <dd>{chageDateFormat(comment.createdAt)}</dd>
           </dl>
         </div>
-        <StUpdateDeleteButton
-          formToggle={formToggle}
-        >
-          <span onClick={onClickOpenUpdateForm}>수정</span>
-          <span onClick={() => onClickDeleteComment(comment.commentId)}>삭제</span>
-        </StUpdateDeleteButton>
+        {userAccount === comment.account &&
+          <StUpdateDeleteButton
+            formToggle={formToggle}
+          >
+            <span onClick={onClickOpenUpdateForm}>수정</span>
+            <span onClick={() => onClickDeleteComment(comment.commentId)}>삭제</span>
+          </StUpdateDeleteButton>
+         }
       </div>
       <StCommentTextBox
         formToggle={formToggle}

@@ -10,6 +10,7 @@ const DetailContainer = ({ postDetail, userDetail, heartCount, heartPush }) => {
   const navigate = useNavigate();
   const postId = useParams().postId;
   const userToken = localStorage.getItem('access-token');
+  const userAccount = localStorage.getItem('user-info');
   
   // :: 날짜 형식 변환
   const dateArrayToString = String(postDetail.createdAt);
@@ -32,7 +33,8 @@ const DetailContainer = ({ postDetail, userDetail, heartCount, heartPush }) => {
       <StPostDetailHeaderWrap>
         <h1>{postDetail.title}</h1>
 
-          <StPostInfoBox>
+          {userAccount === userDetail.account &&
+            <StPostInfoBox>
             <p className='postInfo'>
               <strong>{userDetail.username}</strong> 
               <b>&#183;</b>
@@ -51,7 +53,12 @@ const DetailContainer = ({ postDetail, userDetail, heartCount, heartPush }) => {
               </Link>
               <span onClick={onClickDeletePost}>삭제</span>
             </div>
-          </StPostInfoBox>
+          </StPostInfoBox> 
+          
+          }
+          
+
+
         <StPostDetailTagBox>
           {postDetail.tags && postDetail.tags.map((tag, index) => (
             <li key={tag+index}>{tag}</li>
