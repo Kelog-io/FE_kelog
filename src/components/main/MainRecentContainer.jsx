@@ -4,7 +4,7 @@ import MainPostCard from './MainPostCard';
 import 'react-intersection-observer';
 import axios from 'axios';
 
-const MainRecentContainer = ({ data }) => {
+const MainRecentContainer = () => {
   const [randomData, setRandomData] = useState([]);
   const [page, setPage] = useState(0);
   const [lastIntersectingData, setLastIntersectingData] = useState(null);
@@ -75,7 +75,7 @@ const MainRecentContainer = ({ data }) => {
                   <MainPostCard
                     key={item.id}
                     item={item}
-                    ref={lastIntersectingData}
+                    ref={setLastIntersectingData}
                   />
                 );
               } else {

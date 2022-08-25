@@ -36,27 +36,23 @@ const MainContainer = ({ data }) => {
   const month = useSelector((state) => state.post.monthPost);
   // 올해
   const year = useSelector((state) => state.post.yearPost);
-  // 마이 페이지
-  const myPage = useSelector((state) => state.post.myPost);
-  // 로딩
-  const [isLoading, setLoading] = useState(false);
 
   // 최신 페이지
   useEffect(() => {
     dispatch(getTodayData());
-  }, [getTodayData]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getWeekData());
-  }, [getWeekData]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getMonthData());
-  }, [getMonthData]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getYearData());
-  }, [getYearData]);
+  }, [dispatch]);
 
   return (
     <Stwrapper>
