@@ -19,13 +19,10 @@ const PostingFormContainer = () => {
     content: "",
   });
   const [ tagList, setTagList ] = useState([]);
-  console.log("___PostingForm_imageState ====> ", compressedImageFile);
-  console.log("___PostingForm_contentState ====> ", postInputs.title, postInputs.content);
-  console.log("___PostingForm_tagState ====> ", tagList);
 
   const onClickAddPost = async(event) => {
     event.preventDefault();
-    console.log("게시글을 업로드 해봅시다!");
+
     if(
       postInputs.title === '' ||
       postInputs.content === '' ||
@@ -73,10 +70,6 @@ const PostingFormContainer = () => {
           }
         );
         
-        console.log("postContentsResponse:::", postContentsResponse);
-
-
-        
         navigate(`/post/${postContentsResponse.data.data.id}`, {replace: true});
 
       } catch(error) {
@@ -92,8 +85,6 @@ const PostingFormContainer = () => {
       });
     }
   }
-
-  // navigate(`/${postContentsResponse.data.data.id}`, {replace: true});
  
   return (
   <StPostingFormContainer>

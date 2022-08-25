@@ -32,7 +32,6 @@ const SignUpForm = (props) => {
   const success = useSelector((state) => state.user.success);
 
   const onSubmit = async (data) => {
-    console.log(data);
     if (data.password !== data.rePassword) {
       alert('비밀번호와 일치하는지 확인하세요');
     }
@@ -74,15 +73,12 @@ const SignUpForm = (props) => {
           },
         }
       );
-      console.log(postRegisterResponse);
     } catch (error) {
       console.log(error);
     }
     alert('회원가입 성공');
     window.location.reload();
   };
-
-  console.log(watch());
 
   const onError = (error) => {
     console.log(error);
@@ -97,7 +93,6 @@ const SignUpForm = (props) => {
   const onDuplicate = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log('dataId', event.target.value);
     dispatch(existMemberId({ account: id }));
   };
 

@@ -8,7 +8,6 @@ const URL = {
 export const userLogin = createAsyncThunk(
   'user/login',
   async (payload, { getState, rejectWithValue }) => {
-    console.log(payload);
     const { user } = getState();
     try {
       const config = {
@@ -24,7 +23,6 @@ export const userLogin = createAsyncThunk(
         config
       );
       localStorage.setItem('access-token', response.headers.authorization);
-      console.log(response);
       return response;
     } catch (error) {
       // return custom error message from API if any
@@ -65,7 +63,6 @@ export const logoutUser = createAsyncThunk(
   'user/logout',
   async (arg, { getState, rejectWithValue }) => {
     const { user } = getState();
-    console.log(user);
     try {
       await axios.post(
         `${URL.BASE}api/member/logout`,
@@ -90,7 +87,6 @@ export const logoutUser = createAsyncThunk(
 export const existMemberId = createAsyncThunk(
   'user/existMemberId',
   async (payload, { rejectWithValue }) => {
-    console.log(payload);
     try {
       const config = {
         headers: {
@@ -102,7 +98,6 @@ export const existMemberId = createAsyncThunk(
         payload,
         config
       );
-      console.log(response);
       return response;
     } catch (error) {
       if (error.response && error.response.data.message) {

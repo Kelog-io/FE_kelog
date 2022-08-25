@@ -13,18 +13,19 @@ const Heart = ({ postId, heartCount, heartPush }) => {
   }
 
   // :: 링크 복사 기능
+  const URL = {
+    CLIENT: process.env.REACT_APP_CLIENT_URL,
+  };
   const location = useLocation();
   const handleCopyClicpBoard = async (url) => {
     try {
+      console.log(location);
       await navigator.clipboard.writeText(url);
       alert("링크 복사 성공");
     } catch (error) {
       alert("링크 복사 실패");
     }
   }
-
-  console.log(heartCount);
-  console.log(heartPush);
 
   return (
     <StPostLeftMenuBox>

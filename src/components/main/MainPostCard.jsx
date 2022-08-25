@@ -8,6 +8,9 @@ const MainPostCard = ({ item }) => {
   const day = item.createdAt[2];
   const img = item.imgUrl;
   const postId = item.id;
+  const userAccount = localStorage.getItem('user-info');
+  const userImage = localStorage.getItem('user-profile');
+
   // 하트 카운트가 없다.(null)  / 작성자도 없다.
 
   return (
@@ -18,7 +21,7 @@ const MainPostCard = ({ item }) => {
         </div>
       </NavLink>
       <div className='content'>
-        <a className='content-title' href='/@geeneve/2021-백엔드-개발자-로드맵'>
+        <a className='content-title'>
           <h4>{item.title}</h4>
           <div className='content-content'>
             <p>{item.content}</p>
@@ -28,18 +31,18 @@ const MainPostCard = ({ item }) => {
           <span>
             {year}년 {month}월 {day}일
           </span>
-          <span className='separator'>·</span>
-          <span>23개의 댓글</span>
+          {/* <span className='separator'>·</span>
+          <span>{}개의 댓글</span> */}
         </div>
       </div>
       <div className='user-info'>
-        <a className='user' href='/@geeneve'>
+        <a className='user'>
           <img
-            src='https://velog.velcdn.com/images/geeneve/profile/33a27057-ccd5-4fa9-9631-57a5376f73ba/IMG_3328.JPG'
+            src={item.profileimage}
             alt='user thumbnail of geeneve'
           />
           <span>
-            by <b>geeneve</b>
+            by <b>{item.account}</b>
           </span>
         </a>
         <div className='likes'>
@@ -49,7 +52,7 @@ const MainPostCard = ({ item }) => {
               d='M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z'
             ></path>
           </svg>
-          {item.heartCount}3
+          {item.heartCount}
         </div>
       </div>
     </Stwrapper>

@@ -11,14 +11,10 @@ import { logout } from '../../redux/modules/userSlice';
 
 const GlobalHeaders = ({ userToken, isToggle, setIsToggle }) => {
   const [modalOn, setModalOn] = useState(false);
-
   const dispatch = useDispatch();
-
   const profile = localStorage.getItem('user-profile');
-  console.log(profile);
-
   const data = useSelector((state) => state.user);
-  console.log(data);
+
   // 모달 상태 변경
   const handleModal = () => {
     setModalOn(!modalOn);
@@ -36,9 +32,6 @@ const GlobalHeaders = ({ userToken, isToggle, setIsToggle }) => {
     dispatch(logout());
     window.location.reload();
   };
-
-  // console.log('main header 로그인 여부 확인 :::', userToken);
-  // console.log('main header 토글 여부 확인 :::', isToggle);
 
   return (
     <GlobalLayout>

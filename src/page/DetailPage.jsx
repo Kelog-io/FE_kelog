@@ -30,7 +30,6 @@ const DetailPage = () => {
   const userToken = localStorage.getItem('access-token')
   ? localStorage.getItem('access-token')
   : null;
-  // const userInfo = useSelector(state => state.userSlice.userInfo);
   const postId = useParams().postId;
 
   
@@ -40,13 +39,6 @@ const DetailPage = () => {
     dispatch(__getUserDetail(postId));
   }, [dispatch, postId]);
 
-  console.log(postId);
-  console.log("=============>", userDetail);
-  console.log("Detail_page=============>", postDetail);
-  console.log("Detail_page=============>", heartPush);
-  console.log("Detail_page=============>", heartCount);
-  console.log("Detail_page=============>", userToken);
-  // console.log("userInfo Detail_page=============>", userInfo);
   return (
     <StDetailPageWrap>
       {/* user id header에 보내야함 */}

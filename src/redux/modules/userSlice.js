@@ -44,7 +44,6 @@ const userSlice = createSlice({
     },
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      console.log(payload.data);
       state.userInfo = payload.data.account;
       state.profileImg = payload.data.profileImg;
       localStorage.setItem('user-profile', payload.data.profileImg);
@@ -93,7 +92,6 @@ const userSlice = createSlice({
     },
     [existMemberId.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      console.log(payload);
       state.idMsg = payload.data.data;
       if (payload.data.data === null) {
         state.idErrorMsg = payload.data.error.message;

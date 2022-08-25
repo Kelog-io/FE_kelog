@@ -14,11 +14,14 @@ const DetailContainer = ({ postDetail, userDetail, heartCount, heartPush }) => {
   
   // :: 날짜 형식 변환
   const dateArrayToString = String(postDetail.createdAt);
+  
   const year = dateArrayToString.substring(0, 4);
   const month = dateArrayToString.substring(5, 6);
   const day = dateArrayToString.substring(7, 9);
 
   const dateFormat = `${year}년 ${month}월 ${day}일`;
+
+  console.log(dateArrayToString, dateFormat);
 
 
   // :: 게시글 삭제
@@ -33,29 +36,30 @@ const DetailContainer = ({ postDetail, userDetail, heartCount, heartPush }) => {
       <StPostDetailHeaderWrap>
         <h1>{postDetail.title}</h1>
 
-          {userAccount === userDetail.account &&
+          
             <StPostInfoBox>
             <p className='postInfo'>
               <strong>{userDetail.username}</strong> 
               <b>&#183;</b>
               <span>{dateFormat}</span>
             </p>
-            <div className='postButton'>
-              <span onClick={()=> {alert("이 서비스는 현재 준비중 입니다!")}}>통계</span>
-              <Link 
-                to={`/update/${postId}`} 
-                state={{
-                  postId: postId,
-                  postDetail: postDetail
-                }}
-              >
-                <span>수정</span>
-              </Link>
-              <span onClick={onClickDeletePost}>삭제</span>
-            </div>
+            {userAccount === userDetail.account &&
+              <div className='postButton'>
+                <span onClick={()=> {alert("이 서비스는 현재 준비중 입니다!")}}>통계</span>
+                <Link 
+                  to={`/update/${postId}`} 
+                  state={{
+                    postId: postId,
+                    postDetail: postDetail
+                  }}
+                >
+                  <span>수정</span>
+                </Link>
+                <span onClick={onClickDeletePost}>삭제</span>
+              </div>
+            }
           </StPostInfoBox> 
           
-          }
           
 
 

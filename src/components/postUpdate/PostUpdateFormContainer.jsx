@@ -15,8 +15,6 @@ const PostingFormContainer = () => {
     dispatch(__getPostDetail(postId));
   }, [dispatch]);
 
-
-  console.log("%%%%%%%%%%%%", postDetail);
   // ::: 뒤로가기
   const navigate = useNavigate();
   const goingBack = () => {
@@ -32,13 +30,13 @@ const PostingFormContainer = () => {
 
   const onClickUpdatePost = async(event) => {
     event.preventDefault();
-    console.log("게시글을 업로드 해봅시다!");
+
     if(
       postInputs.title === '' ||
       postInputs.content === ''
     ) {
-      postInputs.title === '' && console.log("title을 입력해주어야 함");
-      postInputs.content === '' && console.log("content를 입력해주어야 함");
+      postInputs.title === '' && console.log("title을 입력해주세요");
+      postInputs.content === '' && console.log("content를 입력해주세요");
     } else {
       console.log("유효성 검사 통과 ::: 서버로 데이터 전송!");
 
@@ -47,7 +45,7 @@ const PostingFormContainer = () => {
         BASE: process.env.REACT_APP_BASE_URL,
       };
       const USER = {
-        AUTHORIZATION: process.env.REACT_APP_CLIENT_AUTHORIZATION,
+        AUTHORIZATION: localStorage.getItem('access-token'),
       };
       try {
         const postContentsResponse = await axios.put(
@@ -58,7 +56,7 @@ const PostingFormContainer = () => {
           },
           {
             headers: {
-              AUTHORIZATION: localStorage.getItem('access-token'),
+              Authorization: USER.AUTHORIZATION,
             },
           }
         );

@@ -41,8 +41,6 @@ export const __getCommentAllByPostId = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get(`${URL.BASE}api/comment/${payload}`);
-      console.log("#########", payload);
-      console.log("~~~~~~~~~~~~~~~~~", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -80,7 +78,6 @@ export const __updateCommentByCommentId = createAsyncThunk(
           Authorization: `${USER.AUTHORIZATION}`
         }
       });
-      console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -113,11 +110,8 @@ const commentSlice = createSlice({
     },
     [__createCommentByPostId.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("create :::: state.comment+++++++++>>>>", state.comment);
-      console.log("create :::: action.payload+++++++++>>>>", action.payload);
       state.comment.responseDto.push(action.payload.data);
       state.comment.commentcount += 1;
-      console.log("!!!!!!!!!!!!!create :::: state.comment+++++++++>>>>", state.comment);
     },
     [__createCommentByPostId.rejected]: (state, action) => {
       state.isLoading = false;
@@ -131,9 +125,6 @@ const commentSlice = createSlice({
     },
     [__deleteCommentByCommentId.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("delete :::: state.comment.responseDto+++++++++>>>>", state.comment.responseDto);
-      console.log("delete :::: action.payload+++++++++>>>>", action.payload.data);
-
       state.comment.responseDto = state.comment.responseDto.filter(
         (commentCard) => 
           commentCard.commentId !== action.payload.data
@@ -152,9 +143,6 @@ const commentSlice = createSlice({
     },
     [__updateCommentByCommentId.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("update :::: state.comment.responseDto+++++++++>>>>", state.comment.responseDto);
-      console.log("update :::: action.payload+++++++++>>>>", action.payload.data);
-
       state.comment.responseDto = state.comment.responseDto.map((commentCard) => (
         commentCard.commentId === action.payload.data.commentId
           ? action.payload.data

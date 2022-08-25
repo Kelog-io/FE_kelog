@@ -45,7 +45,6 @@ export const __updatePostHeart = createAsyncThunk(
           Authorization: `${USER.AUTHORIZATION}`,
         }
       });
-      console.log("&&&&&&&&&&&&&&", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch(error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -60,7 +59,6 @@ export const __getUserDetail = createAsyncThunk(
     try {
       const response = await axios.get(`${URL.BASE}api/info/${payload}`);
 
-      console.log("######user", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -79,7 +77,6 @@ export const __deletePost = createAsyncThunk(
           Authorization: `${USER.AUTHORIZATION}`
         }
       }, {});
-      console.log("post delete!!!!>>>>>>", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -114,12 +111,9 @@ const postSlice = createSlice({
     },
     [__getPostDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload.data);
       state.postDetail = action.payload.data;
       state.heartCount = action.payload.data.heartCount;
       state.heartPush= action.payload.data.heartPush;
-      console.log(state.heartPush);
-      console.log(state.heartCount);
     },
     [__getPostDetail.rejected]: (state, action) => {
       state.isLoading = false;
@@ -132,12 +126,8 @@ const postSlice = createSlice({
     },
     [__updatePostHeart.fulfilled]: (state, action) => {
       state.isLoading = false;
-      
       state.heartPush === true ? state.heartPush = false : state.heartPush = true;
       state.heartCount = action.payload.data;
-      console.log(action.payload);
-      console.log(state.heartPush);
-      console.log(state.heartCount);
     },
     [__updatePostHeart.rejected]: (state, action) => {
       state.isLoading = false;
@@ -150,13 +140,10 @@ const postSlice = createSlice({
     },
     [__deletePost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("post delete state post!!!!>>>>>>", state.post);
-      console.log("post delete action.payload!!!!>>>>>>", action.payload);
       state.post = state.post.filter(
         (postcard) => 
           postcard.id !== action.payload.data
         );
-        console.log("post delete state post!!!!>>>>>>", state.post);
     },
     [__deletePost.rejected]: (state, action) => {
       state.isLoading = false;

@@ -20,7 +20,7 @@ const PostRegisterImage = ({ setCompressedImageFile }) => {
   // ::: 이미지 미리보기(Image Preview)
   const onChangePostImageFile = async (event) => {
     const postImageFile = event.target.files[0];
-    console.log(postImageFile);
+
     try {
       const compressedFile = await compressImageAndGetImageFile(postImageFile);
       setCompressedImageFile(compressedFile);

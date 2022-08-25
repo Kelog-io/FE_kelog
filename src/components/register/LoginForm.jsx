@@ -22,8 +22,7 @@ const LoginForm = (props) => {
   const isAuth = localStorage.getItem('access-token');
 
   const { loading, userInfo, userToken } = useSelector((state) => state.user);
-  console.log(userToken);
-  console.log(isAuth);
+
   const sendData = (event) => {
     event.preventDefault();
     props.changeState();
@@ -54,8 +53,6 @@ const LoginForm = (props) => {
     };
     dispatch(userLogin(body));
   };
-
-  console.log(watch());
 
   const onError = (error) => {
     console.log(error);

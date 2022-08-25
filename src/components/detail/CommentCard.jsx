@@ -13,8 +13,6 @@ const CommentCard = ({comment}) => {
   const [ formToggle, setFormToggle ] = useState(false);
   const userAccount = localStorage.getItem('user-info');
 
-  console.log("comment@@@@@@@", comment);
-
   // :: 댓글 삭제
   const onClickDeleteComment = (commentId) => {
     dispatch(__deleteCommentByCommentId(commentId));
@@ -23,7 +21,6 @@ const CommentCard = ({comment}) => {
   // ::: 수정하기 활성화
   const onClickOpenUpdateForm = () => {
     setFormToggle(!formToggle);
-
   }
 
   // ::: 수정 댓글 입력값 받기

@@ -3,8 +3,6 @@ import CommentCard from './CommentCard';
 import styled from 'styled-components';
 
 const CommentList = ({ commentsList }) => {
-  
-  console.log("++++++++++++++++>>>>>>", commentsList);
   return (
     <StCommentListWrap>
       {commentsList.responseDto &&
