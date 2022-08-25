@@ -90,19 +90,11 @@ const PostingFormContainer = () => {
         title: '',
         content: '',
       });
-
-      
-
-      
-
     }
   }
 
-
   // navigate(`/${postContentsResponse.data.data.id}`, {replace: true});
  
-
-
   return (
   <StPostingFormContainer>
     <div>

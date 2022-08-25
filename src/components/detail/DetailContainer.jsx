@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { FaHeart } from 'react-icons/fa';
 import styled from 'styled-components';
 import { __getPostDetail, __deletePost } from '../../redux/modules/postSlice';
 import Heart from './Heart';
@@ -10,6 +9,7 @@ const DetailContainer = ({ postDetail, userDetail, heartCount, heartPush }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const postId = useParams().postId;
+  const userToken = localStorage.getItem('access-token');
   
   // :: 날짜 형식 변환
   const dateArrayToString = String(postDetail.createdAt);
@@ -26,40 +26,32 @@ const DetailContainer = ({ postDetail, userDetail, heartCount, heartPush }) => {
     navigate(`/`);
   }
 
-  // :: 게시글 수정
-  // const onClickUpdatePost = () => {
-  //   alert("수정하기 페이지로 이동해야함~!");
-  // }
-
-  console.log("$$$$$$$$$$$$$$", postDetail);
-  console.log("$$$$$$$$$$$$$$", heartCount);
-  console.log("$$$$$$$$$$$$$$", heartPush);
   return (
     <StDetailContainer>
       <Heart postId={postId} heartCount={heartCount} heartPush={heartPush} />
       <StPostDetailHeaderWrap>
         <h1>{postDetail.title}</h1>
-        <StPostInfoBox>
-          <p className='postInfo'>
-            <strong>{userDetail.username}</strong> 
-            <b>&#183;</b>
-            <span>{dateFormat}</span>
-          </p>
-          <div className='postButton'>
-            <span onClick={()=> {alert("이 서비스는 현재 준비중 입니다!")}}>통계</span>
-            <Link 
-              to={`/update/${postId}`} 
-              state={{
-                postId: postId,
-                postDetail: postDetail
-              }}
-            >
-              <span>수정</span>
-            </Link>
-            <span onClick={onClickDeletePost}>삭제</span>
-          </div>
-        </StPostInfoBox>
-       
+
+          <StPostInfoBox>
+            <p className='postInfo'>
+              <strong>{userDetail.username}</strong> 
+              <b>&#183;</b>
+              <span>{dateFormat}</span>
+            </p>
+            <div className='postButton'>
+              <span onClick={()=> {alert("이 서비스는 현재 준비중 입니다!")}}>통계</span>
+              <Link 
+                to={`/update/${postId}`} 
+                state={{
+                  postId: postId,
+                  postDetail: postDetail
+                }}
+              >
+                <span>수정</span>
+              </Link>
+              <span onClick={onClickDeletePost}>삭제</span>
+            </div>
+          </StPostInfoBox>
         <StPostDetailTagBox>
           {postDetail.tags && postDetail.tags.map((tag, index) => (
             <li key={tag+index}>{tag}</li>

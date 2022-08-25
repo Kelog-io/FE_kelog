@@ -58,7 +58,7 @@ const PostingFormContainer = () => {
           },
           {
             headers: {
-              Authorization: `${USER.AUTHORIZATION}`
+              AUTHORIZATION: localStorage.getItem('access-token'),
             },
           }
         );

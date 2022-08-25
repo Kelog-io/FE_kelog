@@ -8,6 +8,7 @@ const CommentForm = () => {
   const dispatch = useDispatch();
   const postId = useParams().postId;
   const [commentTextArea, setCommentTextArea] = useState('');
+  const userToken = localStorage.getItem('access-token');
 
 
   // ::: 댓글 등록 입력값 확인
@@ -26,20 +27,25 @@ const CommentForm = () => {
 
   return (
     <StCommentFormWrap>
-      <textarea 
-        placeholder='댓글을 작성하세요.'
-        onChange={onChangeCommentMessage}
-        value={commentTextArea}
-      >
-      </textarea>
-      <div className='commentAddButtonWrap'>
-        <button 
-          className='buttonPoint'
-          onClick={onClickAddComment}
+      {
+        userToken !== null &&
+        <>
+        <textarea 
+          placeholder='댓글을 작성하세요.'
+          onChange={onChangeCommentMessage}
+          value={commentTextArea}
         >
-          댓글 작성
-        </button>
-      </div>
+        </textarea>
+        <div className='commentAddButtonWrap'>
+          <button 
+            className='buttonPoint'
+            onClick={onClickAddComment}
+          >
+            댓글 작성
+          </button>
+        </div>
+        </>
+      }
     </StCommentFormWrap>
   );
 };
